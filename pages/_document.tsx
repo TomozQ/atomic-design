@@ -7,7 +7,7 @@ export default class MyDocument extends Document {
         const originalRenderPage = ctx.renderPage
 
         try {
-            ctx.renderPage = async () => {
+            ctx.renderPage = () => 
                 originalRenderPage({
                     enhanceApp: (App) => (props) =>
                         sheet.collectStyles(<App { ...props } />),
@@ -22,7 +22,6 @@ export default class MyDocument extends Document {
                         sheet.getStyleElement()
                     ],
                 }
-            }
         } finally {
             sheet.seal()
         }
