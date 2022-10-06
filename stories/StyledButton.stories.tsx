@@ -7,6 +7,8 @@ export default {
     title: 'StyledButton',
     // 使用するコンポーネント
     component: StyledButton,
+    // onClickが呼ばれたときにclickedというアクションを出力する
+    argTypes: { onClick: {action: 'clicked'}},
 } as ComponentMeta<typeof StyledButton>
 
 export const Primary = (props: any) => {
