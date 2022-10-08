@@ -6,6 +6,7 @@
     ・入力して1秒経過した後にonChangeコールバックが呼ばれる
 */
 
+import { fireEvent } from '@storybook/testing-library'
 import { render, screen, RenderResult } from '@testing-library/react'
 import { DelayInput } from './index'
 
@@ -36,5 +37,19 @@ describe('DelayInput', () => {
 
         // 初期表示は空
         expect(spanNode).toHaveTextContent('入力したテキスト')
+    })
+
+    // 入力直後はspan要素が「入力中・・・」と表示するテスト
+    it('should display 「入力中・・・」 immediately after onChange event occurs', () => {
+        const inputText = 'Test Input Text'
+        const inputNode = screen.getByTestId('input-text') as HTMLInputElement
+
+        // inputのonChangeイベントを呼びだす
+        fireEvent.change(inputNode, { target: { value: inputText } })
+         
+        const spanNode = screen.getByTestId('display-text') as HTMLSpanElement
+
+        // 入力中と表示するか確認
+        expect(spanNode).toHaveTextContent('入力中・・・')
     })
 })

@@ -46,7 +46,7 @@ export const DelayInput = (props: DelayButtonProps) => {
 
     }, [onChange])
 
-    const text = isTyping ? '入力中' : `入力したテキスト: ${ viewValue }`
+    const text = isTyping ? '入力中・・・' : `入力したテキスト: ${ viewValue }`
 
     return (
         <div>
