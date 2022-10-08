@@ -43,4 +43,32 @@ describe('Input', () => {
         // input要素に入力したテキストが表示されているか確認する
         expect(inputNode).toHaveValue(inputText)
     })
+
+    // ボタンが押されたら、入力テキストがクリアするかチェック
+    it('should reset when user clicks button', async () => {
+        // 最初にinputにテキストを入力する
+        const inputText = 'Test Input Text'
+        const inputNode = screen.getByLabelText('Username') as HTMLInputElement
+        fireEvent.change(inputNode, { target: { value: inputText } })
+
+        // buttonを取得する
+        const buttonNode = screen.getByRole('button', {
+            name: 'Reset',
+        }) as HTMLButtonElement
+
+        /*
+            getByRole
+            DOMにroleやaria-labelなどのロールが設定されている場合、ロールに応じてマッチするDOMを取得するための関数
+            buttonにはデフォルトでbuttonというroleが暗黙的に指定されている。
+            このためgetByRoleでDOMを取得することができる
+
+            getByRole関数の第二引数のオブジェクトにボタンで表示しているテキストを指定して、どのボタンかを指定して取得する
+        */
+
+        // ボタンをクリックする
+        fireEvent.click(buttonNode)
+
+        // input要素の表示が空か確認する
+        expect(inputNode).toHaveValue('')
+    })
 })
