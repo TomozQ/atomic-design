@@ -84,4 +84,21 @@ describe('DelayInput', () => {
         // 入力したテキストが表示されるか確認
         expect(spanNode).toHaveTextContent(`入力したテキスト: ${inputText}`)
     })
+
+    // 入力して1秒後にonChangeが呼ばれるかテスト
+    it('should call onChange 1second after onChange event occurs', async () => {
+        const inputText = 'Test Inputt Text'
+        const inputNode = screen.getByTestId('input-text') as HTMLInputElement
+
+        // inputのonChangeイベントを呼びだす
+        fireEvent.change(inputNode, { target: { value: inputText } })
+
+        // タイマーの実行
+        await act (() => {
+            jest.runAllTimers()
+        })
+
+        // モック関数を渡し、呼ばれたかを確認する。
+        expect(handleChange).toHaveBeenCalled()
+    })
 })
