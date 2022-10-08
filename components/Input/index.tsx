@@ -19,8 +19,9 @@ export const Input = (props: InputProps) => {
 
     return (
         <div>
-            <label htmlFor={props.id}>{label}</label>
-            <input {...rest} type="text" value={text} onChange={onInputChange} />
+            {/* <label htmlFor={props.id}>{label}</label> */}
+            {/* label要素を使用しない場合は、input要素にaria-labelを指定することでもgetByLabelTextで要素を取得することができる */}
+            <input {...rest} type="text" value={text} onChange={onInputChange} aria-label={label}/>
             <button onClick={ resetInputField }>Reset</button>
         </div>
     )
